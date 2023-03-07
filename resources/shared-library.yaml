@@ -1,0 +1,19 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: GitRepository
+metadata:
+  name: shared-library
+  namespace: dev
+spec:
+  gitImplementation: go-git
+  ignore: |
+    /*
+    !.git
+    !/pom.xml
+    !/shared-library
+  interval: 1m0s
+  ref:
+    branch: main
+  secretRef:
+    name: git-ssh
+  timeout: 60s
+  url: https://github.com/garethjevans/example-maven-monorepo
